@@ -14,6 +14,15 @@ Vagrant.configure("2") do |c|
 <% if config[:ssh_key] %>
   c.ssh.private_key_path = "<%= config[:ssh_key] %>"
 <% end %>
+<% if config[:windows][:halt_timeout] %>
+  c.windows.halt_timeout = "<%= config[:windows][:halt_timeout] %>"
+<% end %>
+<% if config[:winrm][:username] %>
+  c.winrm.username = "<%= config[:winrm][:username] %>"
+<% end %>
+<% if config[:winrm][:password] %>
+  c.winrm.password = "<%= config[:winrm][:password] %>"
+<% end %>
 
 <% Array(config[:network]).each do |opts| %>
   c.vm.network(:<%= opts[0] %>, <%= opts[1..-1].join(", ") %>)
